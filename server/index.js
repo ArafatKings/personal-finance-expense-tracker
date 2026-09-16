@@ -5,7 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const initSqlJs = require('sql.js');
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 const DB_DIR = path.join(__dirname, '..', 'data');
 const DB_FILE = path.join(DB_DIR, 'finance.sqlite');
 fs.mkdirSync(DB_DIR, { recursive: true });
