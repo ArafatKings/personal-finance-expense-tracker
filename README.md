@@ -49,3 +49,23 @@ Dashboard · Transactions · Income · Expenses · Categories · Reports & Analy
 ## Production note
 
 This is intended as a local university project/demo. For production deployment, replace the in-memory Express session store with a persistent session store, use environment variables for secrets, add CSRF protection, HTTPS, rate limiting, and additional validation.
+
+
+## Netlify deployment
+
+This repository contains the original local version plus a Netlify Function for the online API. The online API uses a persistent Turso/libSQL database and signed HttpOnly authentication cookies.
+
+### Netlify settings
+- Build command: `npm run build`
+- Publish directory: `dist`
+- Functions directory: `netlify/functions`
+
+### Required Netlify environment variables
+- `TURSO_DATABASE_URL` — your Turso database URL
+- `TURSO_AUTH_TOKEN` — your Turso database auth token
+- `PFTRACKER_JWT_SECRET` — a long random secret used to sign login cookies
+
+Do not put these secrets in GitHub. Add them in Netlify Project configuration → Environment variables.
+
+### Important
+The `data/finance.sqlite` file is for local development. Netlify uses the Turso database when the site is deployed.
